@@ -1,29 +1,30 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
-export const Container = styled.footer`
-  background-color: ${cores.cinza};
-  padding: 32px 0;
-  font-size: 14px;
-`
-
-export const SectionTitle = styled.h4`
-  color: ${cores.branca};
-  font-size: 16px;
-  font-weight: bold;
-`
-
-export const Links = styled.ul`
+export const FooterContainer = styled.div`
+  background-color: ${cores.bege};
+  padding: 40px 0;
   display: flex;
-  margin-top: 16px;
+  flex-direction: column;
+  text-align: center;
+  height: auto;
 `
 
-export const Link = styled.a`
-  color: ${cores.cinzaClaro};
-  text-decoration: none;
-  margin-right: 8px;
+export const RedesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0 80px;
 `
 
-export const FooterSection = styled.div`
-  margin-bottom: 64px;
+export const Descricao = styled.p`
+  margin: auto;
+  font-size: 10px;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 20px;
+  }
 `

@@ -1,53 +1,31 @@
-import { Container, FooterSection, Link, Links, SectionTitle } from './styles'
+import { FooterContainer, RedesContainer, Descricao } from './styles'
 
-const currentYear = new Date().getFullYear()
+import logo from '../../assets/images/logo.png'
+import instagram from '../../assets/images/instagram.png'
+import facebook from '../../assets/images/facebook.png'
+import twitter from '../../assets/images/twitter.png'
+import { Link } from 'react-router-dom'
 
 const Footer = () => (
-  <Container>
+  <FooterContainer>
     <div className="container">
-      <FooterSection>
-        <SectionTitle>Categorias</SectionTitle>
-        <Links>
-          <li>
-            <Link>RPG</Link>
-          </li>
-          <li>
-            <Link>Ação</Link>
-          </li>
-          <li>
-            <Link>Aventura</Link>
-          </li>
-          <li>
-            <Link>Esportes</Link>
-          </li>
-          <li>
-            <Link>Simulação</Link>
-          </li>
-          <li>
-            <Link>Estratgiaé</Link>
-          </li>
-          <li>
-            <Link>FPS</Link>
-          </li>
-        </Links>
-      </FooterSection>
-      <FooterSection>
-        <SectionTitle>Acesso rápido</SectionTitle>
-        <Links>
-          <li>
-            <Link>Novidades</Link>
-          </li>
-          <li>
-            <Link>Promoções</Link>
-          </li>
-          <li>
-            <Link>Em breve</Link>
-          </li>
-        </Links>
-        <p>{currentYear} &copy; E-PLAY Todos os direitos reservados</p>
-      </FooterSection>
+      <Link to="/">
+        <img src={logo} alt="Efood" />
+      </Link>
+      <RedesContainer>
+        <img src={instagram} alt="Instagram" />
+        <img src={facebook} alt="Facebook" />
+        <img src={twitter} alt="Twitter" />
+      </RedesContainer>
+      <div>
+        <Descricao>
+          A efood é uma plataforma para divulgação de estabelecimentos, a
+          responsabilidade pela entrega, qualidade dos produtos é toda do
+          estabelecimento contratado.
+        </Descricao>
+      </div>
     </div>
-  </Container>
+  </FooterContainer>
 )
 
 export default Footer

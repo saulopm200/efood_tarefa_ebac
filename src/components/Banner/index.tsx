@@ -1,30 +1,31 @@
-import { Imagem, Titulo, Precos } from './styles'
+import { useParams } from 'react-router-dom'
 
-import bannerImg from '../../assets/images/banner-homem-aranha.png'
-import Tag from '../Tag'
-import Button from '../Button'
+import { Imagem, Text, Titulo, Container } from './styles'
 
-const Banner = () => (
-  <Imagem style={{ backgroundImage: `url(${bannerImg})` }}>
-    <div className="container">
-      <Tag size="big">Destaque do dia</Tag>
-      <div>
-        <Titulo>Marvel&apos; Spider-Man: Miles Morales PS4 & PS5</Titulo>
-        <Precos>
-          De<span> R$ 250,00 </span> <br />
-          por apenas R$99,90
-        </Precos>
+import { useGetBannerQuery } from '../../services/api'
+
+type BannerParams = {
+  id: string
+}
+
+const Banner = () => {
+  const { id } = useParams() as BannerParams
+  const { data: restaurant } = useGetBannerQuery(id)
+
+  return (
+    <Imagem style={{ backgroundImage: `url(${restaurant?.capa})` }}>
+      <div className="container">
+        <Container>
+          <div>
+            <Text>{restaurant?.tipo}</Text>
+          </div>
+          <div>
+            <Titulo>{restaurant?.titulo}</Titulo>
+          </div>
+        </Container>
       </div>
-
-      <Button
-        type="link"
-        to="/produto"
-        title="Clique aqui para aproveitar esta oferta"
-      >
-        Aproveitar
-      </Button>
-    </div>
-  </Imagem>
-)
+    </Imagem>
+  )
+}
 
 export default Banner

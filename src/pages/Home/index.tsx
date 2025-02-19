@@ -1,106 +1,116 @@
-import Banner from '../../components/Banner'
-import ProductsList from '../../components/ProductsList'
-import Game from '../../models/Game'
+//import { useEffect, useState } from 'react'
 
-import resident from '../../assets/images/resident.png'
-import diablo from '../../assets/images/diablo.png'
-import zelda from '../../assets/images/zelda.png'
-import starWars from '../../assets/images/star_wars.png'
+import Header from '../../components/Header'
+import ListaRestaurantes from '../../components/ListaRestaurantes'
+import Loader from '../../components/Loader'
+import { useGetRestaurantsQuery } from '../../services/api'
 
-const promocoes: Game[] = [
-  {
-    id: 1,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    title: 'Resident Evil 4',
-    system: 'Windows',
-    infos: ['10%', 'R$250,00'],
-    image: resident
-  },
-  {
-    id: 2,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    title: 'Resident Evil 4',
-    system: 'PS5',
-    infos: ['5%', 'R$290,00'],
-    image: resident
-  },
-  {
-    id: 3,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    title: 'Resident Evil 4',
-    system: 'Windows',
-    infos: ['10%', 'R$250,00'],
-    image: resident
-  },
-  {
-    id: 4,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    title: 'Resident Evil 4',
-    system: 'Windows',
-    infos: ['10%', 'R$250,00'],
-    image: resident
+//import ModeloRestaurante from '../../models/Restaurante'
+//import prato1 from '../../assets/images/imagem.png'
+//import estrela from '../../assets/images/estrela.png'
+
+// const comercios: ModeloRestaurante[] = [
+//   {
+//     id: 1,
+//     infos: ['Destaque da semana', 'Japonesa'],
+//     image: prato1,
+//     title: 'Hioki Sushi',
+//     number: '4.9',
+//     star: estrela,
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nihil suscipit nam libero, ipsum sit saepe inventore veritatis quis hic, assumenda molestias reprehenderit officiis natus earum cupiditate perspiciatis excepturi. Mollitia?',
+//     // eslint-disable-next-line react/jsx-key
+//     button: 'Saiba mais'
+//   },
+//   {
+//     id: 2,
+//     infos: ['Japonesa'],
+//     image: prato1,
+//     title: 'Hioki Sushi',
+//     number: '4.6',
+//     star: estrela,
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nihil suscipit nam libero, ipsum sit saepe inventore veritatis quis hic, assumenda molestias reprehenderit officiis natus earum cupiditate perspiciatis excepturi. Mollitia?',
+//     button: 'Saiba mais'
+//   },
+//   {
+//     id: 3,
+//     infos: ['Japonesa'],
+//     image: prato1,
+//     title: 'Hioki Sushi',
+//     number: '4.6',
+//     star: estrela,
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nihil suscipit nam libero, ipsum sit saepe inventore veritatis quis hic, assumenda molestias reprehenderit officiis natus earum cupiditate perspiciatis excepturi. Mollitia?',
+//     button: 'Saiba mais'
+//   },
+//   {
+//     id: 4,
+//     infos: ['Japonesa'],
+//     image: prato1,
+//     title: 'Hioki Sushi',
+//     number: '4.6',
+//     star: estrela,
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nihil suscipit nam libero, ipsum sit saepe inventore veritatis quis hic, assumenda molestias reprehenderit officiis natus earum cupiditate perspiciatis excepturi. Mollitia?',
+//     button: 'Saiba mais'
+//   },
+//   {
+//     id: 5,
+//     infos: ['Japonesa'],
+//     image: prato1,
+//     title: 'Hioki Sushi',
+//     number: '4.6',
+//     star: estrela,
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nihil suscipit nam libero, ipsum sit saepe inventore veritatis quis hic, assumenda molestias reprehenderit officiis natus earum cupiditate perspiciatis excepturi. Mollitia?',
+//     button: 'Saiba mais'
+//   },
+//   {
+//     id: 6,
+//     infos: ['Japonesa'],
+//     image: prato1,
+//     title: 'Hioki Sushi',
+//     number: '4.6',
+//     star: estrela,
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, nihil suscipit nam libero, ipsum sit saepe inventore veritatis quis hic, assumenda molestias reprehenderit officiis natus earum cupiditate perspiciatis excepturi. Mollitia?',
+//     button: 'Saiba mais'
+//   }
+// ]
+
+export type Restaurant = {
+  id: number
+  titulo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  button: string
+  destacado: boolean
+  tipo: string
+  cardapio: {
+    foto: string
+    preco: number
+    id: number
+    nome: string
+    descricao: string
+    porcao: string
   }
-]
+}
 
-const emBreve: Game[] = [
-  {
-    id: 5,
-    category: 'RPG',
-    description:
-      'Hersheys IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    title: 'Diablo 4',
-    system: 'Windows',
-    infos: ['17/05'],
-    image: 'diablo'
-  },
-  {
-    id: 6,
-    category: 'RPG',
-    description:
-      'Hersheys IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    title: 'Zelda',
-    system: 'Windows',
-    infos: ['17/05'],
-    image: 'zelda'
-  },
-  {
-    id: 7,
-    category: 'RPG',
-    description:
-      'Hersheys IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    title: 'Star Wars',
-    system: 'Windows',
-    infos: ['17/05'],
-    image: 'starWars'
-  },
-  {
-    id: 8,
-    category: 'RPG',
-    description:
-      'Hersheys IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    title: 'Resident evil 4',
-    system: 'Nintendo Switch',
-    infos: ['17/05'],
-    image: 'resident'
+const Home = () => {
+  const { data: restaurants } = useGetRestaurantsQuery()
+
+  if (restaurants) {
+    return (
+      <>
+        <Header />
+        <ListaRestaurantes comercios={restaurants} />
+      </>
+    )
   }
-]
 
-const Home = () => (
-  <div>
-    <>
-      <Banner />
-      <ProductsList games={promocoes} title="Promoçoes" background="gray" />
-      <ProductsList games={emBreve} title="Em breve" background="black" />
-    </>
-  </div>
-)
+  return <Loader />
+}
 
 export default Home
