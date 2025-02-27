@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import fechar from '../../assets/images/close.png'
 import { Prato } from '../../pages/Categories'
-import { add, open } from '../../store/reducers/cart'
+import { add, open } from '../../services/store/reducers/cart'
 
 import {
   Imagem,
