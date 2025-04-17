@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import logo from '../../assets/images/logo.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../services/store/reducers/cart'
+import { RootReducer } from '../../../src/services/store/reducers/index'
 
 import { open } from '../../services/store/reducers/cart'
 

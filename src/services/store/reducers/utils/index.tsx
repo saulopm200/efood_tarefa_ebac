@@ -1,4 +1,4 @@
-import { Prato } from '../pages/Categories'
+import { Prato } from '../../../../pages/Categories'
 
 export const getTotalPrice = (items: Prato[]) => {
   return items.reduce((acumulador, valorAtual) => {
