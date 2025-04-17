@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 
-import { RootReducer } from '../../services/store/reducers/index'
-import { close, remove } from '../../services/store/reducers/cart'
-import { formataPreco } from '../PratosRestaurantes'
+import { RootReducer } from '../../../src/services/store'
+import { close, remove } from '../../store/reducers/cart'
+import { formataPreco } from '../PratosRestaurante'
 
 import Checkout from '../Checkout'
 
@@ -16,7 +16,7 @@ import {
   ButtonContinuar
 } from './styles'
 //import { Prato } from '../../pages/Categories'
-import { getTotalPrice } from '../../services/store/reducers/utils/index'
+import { getTotalPrice } from '../../utils'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)

@@ -19,7 +19,7 @@ export const Imagem = styled.div`
 `
 
 export const Text = styled.p`
-  color: ${cores.branca};
+  color: ${cores.branco};
   font-weight: 100;
   font-size: 32px;
   margin-top: 24px;
@@ -32,7 +32,7 @@ export const Text = styled.p`
 
 export const Titulo = styled.h2`
   font-size: 32px;
-  color: ${cores.branca};
+  color: ${cores.branco};
   margin-bottom: 32px;
 
   @media (max-width: ${breakpoints.tablet}) {
