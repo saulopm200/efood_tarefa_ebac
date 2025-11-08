@@ -38,26 +38,28 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
         .min(5, 'O nome precisa ter pelo menos 5 caracteres.')
         .required('O campo é obrigatório.'),
       adress: Yup.string()
-        .min(5, 'Endereço inválido!')
+        .min(5, 'O campo precisa ter pelo menos 5 caracteres')
         .required('Campo obrigatório!'),
       city: Yup.string()
-        .min(5, 'Cidade inválida!')
+        .min(5, 'O campo precisa ter pelo menos 4 caracteres')
         .required('Campo obrigatório!'),
-      cep: Yup.string().min(5, 'Cep inválido!').required('Campo obrigatório!'),
+      cep: Yup.string()
+        .min(9, 'O campo deve ter 9 dígitos')
+        .required('Campo obrigatório!'),
       number: Yup.string()
-        .min(1, 'Número inválido')
+        .min(1, 'O campo precisa ter pelo menos 1 caractere')
         .required('Campo obrigatório!'),
       nameOwner: Yup.string()
-        .min(5, 'Nome inválido')
+        .min(5, 'O campo precisa ter pelo menos 5 caracteres')
         .required('Campo obrigatório!'),
       numberOwner: Yup.string()
-        .min(16, 'Cartão inválido')
+        .min(19, 'O campo deve ter 19 dígitos')
         .required('Campo obrigatório!'),
       cardCode: Yup.string()
-        .min(2, 'CVV inválido!')
+        .min(3, 'O CVV deve ter 3 dígitos')
         .required('Campo obrigatório!'),
       expiresMonth: Yup.string()
-        .min(2, 'Mês inválido!')
+        .min(1, 'O mês não pode ser menor que 1')
         .required('Campo obrigatório!'),
       expiresYear: Yup.string()
         .min(2, 'Ano inválido')
@@ -93,6 +95,14 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
       })
     }
   })
+
+  const getErrorMessage = (fieldName: string, message?: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+
+    if (isTouched && isInvalid) return message
+    return ''
+  }
 
   const formAdressIsValid = () => {
     const isValid =
@@ -146,6 +156,9 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                 onBlur={form.handleBlur}
                 className={checkoutInputHasError('nameOwner') ? 'error' : ''}
               />
+              <small>
+                {getErrorMessage('nameOwner', form.errors.nameOwner)}
+              </small>
             </InputGroup>
             <div className="displayFlex">
               <InputGroup>
@@ -161,6 +174,9 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                   }
                   mask="9999 9999 9999 9999"
                 />
+                <small>
+                  {getErrorMessage('numberOwner', form.errors.numberOwner)}
+                </small>
               </InputGroup>
               <InputGroup className="maxWidth">
                 <label htmlFor="cardCode">CVV</label>
@@ -173,6 +189,9 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                   className={checkoutInputHasError('cardCode') ? 'error' : ''}
                   mask="999"
                 />
+                <small>
+                  {getErrorMessage('cardCode', form.errors.cardCode)}
+                </small>
               </InputGroup>
             </div>
             <div className="displayFlex">
@@ -189,6 +208,9 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                   }
                   mask="99"
                 />
+                <small>
+                  {getErrorMessage('expiresMonth', form.errors.expiresMonth)}
+                </small>
               </InputGroup>
               <InputGroup>
                 <label htmlFor="expiresYear">Ano de vencimento</label>
@@ -203,6 +225,9 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                   }
                   mask="99"
                 />
+                <small>
+                  {getErrorMessage('expiresYear', form.errors.expiresYear)}
+                </small>
               </InputGroup>
             </div>
             <div className="button-container">
@@ -234,6 +259,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                 onBlur={form.handleBlur}
                 className={checkoutInputHasError('fullName') ? 'error' : ''}
               />
+              <small>{getErrorMessage('fullName', form.errors.fullName)}</small>
             </InputGroup>
             <InputGroup>
               <label htmlFor="adress">Endereço</label>
@@ -246,6 +272,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                 onBlur={form.handleBlur}
                 className={checkoutInputHasError('adress') ? 'error' : ''}
               />
+              <small>{getErrorMessage('adress', form.errors.adress)}</small>
             </InputGroup>
             <InputGroup>
               <label htmlFor="city">Cidade</label>
@@ -258,6 +285,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                 onBlur={form.handleBlur}
                 className={checkoutInputHasError('city') ? 'error' : ''}
               />
+              <small>{getErrorMessage('city', form.errors.city)}</small>
             </InputGroup>
             <div className="spaceBetween">
               <InputGroup>
@@ -272,6 +300,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                   className={checkoutInputHasError('cep') ? 'error' : ''}
                   mask="99999-999"
                 />
+                <small>{getErrorMessage('cep', form.errors.cep)}</small>
               </InputGroup>
               <InputGroup>
                 <label htmlFor="number">Número</label>
@@ -284,6 +313,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
                   onBlur={form.handleBlur}
                   className={checkoutInputHasError('number') ? 'error' : ''}
                 />
+                <small>{getErrorMessage('number', form.errors.number)}</small>
               </InputGroup>
             </div>
             <InputGroup>
