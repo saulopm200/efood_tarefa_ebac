@@ -44,7 +44,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
         .min(5, 'O campo precisa ter pelo menos 4 caracteres')
         .required('Campo obrigatório!'),
       cep: Yup.string()
-        .min(9, 'O campo deve ter 9 dígitos')
+        .matches(/^\d{5}-?\d{3}$/, 'CEP inválido. Use o formato 00000-000')
         .required('Campo obrigatório!'),
       number: Yup.string()
         .min(1, 'O campo precisa ter pelo menos 1 caractere')
@@ -53,7 +53,19 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
         .min(5, 'O campo precisa ter pelo menos 5 caracteres')
         .required('Campo obrigatório!'),
       numberOwner: Yup.string()
-        .min(19, 'O campo deve ter 19 dígitos')
+        .matches(
+          /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/,
+          'Número do cartão inválido. Use o formato 0000 0000 0000 0000'
+        )
+        .test(
+          'card-number-length',
+          'O número do cartão deve ter 16 dígitos',
+          (value) => {
+            if (!value) return false
+            const digitsOnly = value.replace(/\s/g, '')
+            return digitsOnly.length === 16
+          }
+        )
         .required('Campo obrigatório!'),
       cardCode: Yup.string()
         .min(3, 'O CVV deve ter 3 dígitos')
